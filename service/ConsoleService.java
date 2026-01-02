@@ -21,12 +21,9 @@ public class ConsoleService {
 
                     System.out.println("Qual é a descrição da sua tarefa");
                     String description = input.nextLine();
-                    
-                    if (description.length() < 3) {
-                        System.out.println("Sua descrição tem que ser maior que 3 caracteres.");
-                        continue;
-                    }
-                    gerenciadorDeTarefas.creatNewTask(title,description);
+
+                    if (!GerenciadorDeTarefas.isDescriptionInvalid(description)) continue;
+                    gerenciadorDeTarefas.createNewTask(title,description);
                     continue;
 
                 case "2":

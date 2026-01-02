@@ -6,20 +6,18 @@ import model.Tarefa;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class GerenciadorDeTarefas {
 
-    Scanner input = new Scanner(System.in);
     List<Tarefa> tarefas = new ArrayList<>();
 
-    public void creatNewTask(String title, String description) throws InterruptedException {
+    public void createNewTask(String title, String description) throws InterruptedException {
         System.out.println("Criando nova tarefa...");
         Thread.sleep(2000);
         System.out.println("Nova tarefa criada: ");
         System.out.printf("Titulo: %s%nDescrição: %s%n" , title, description);
 
-        Tarefa newTarefa = new Tarefa(title, description, StatusType.PEDENTE, LocalDateTime.now());
+        Tarefa newTarefa = new Tarefa(title, description, StatusType.PENDENTE, LocalDateTime.now());
         tarefas.add(newTarefa);
     }
 
@@ -33,7 +31,7 @@ public class GerenciadorDeTarefas {
 
     public void listTaskPending() {
         List<Tarefa> taskPending = tarefas.stream()
-                .filter(task -> task.getStatus() == StatusType.PEDENTE)
+                .filter(task -> task.getStatus() == StatusType.PENDENTE)
                 .toList();
 
         for (Tarefa tarefa : taskPending) {
@@ -50,9 +48,9 @@ public class GerenciadorDeTarefas {
                 System.out.println("Status da tarefa alterado com sucesso!");
                 return;
             }
-
-            System.out.println("Tarefa não encontrada");
         }
+
+        System.out.println("Tarefa não encontrada");
     }
 
     public void deleteTask(String title) {
@@ -63,10 +61,17 @@ public class GerenciadorDeTarefas {
                 System.out.println("Tarefa removida com sucesso");
                 return;
             }
-
-            System.out.println("Tarefa não encontrada");
         }
+
+        System.out.println("Tarefa não encontrada");
     }
 
+    public static boolean isDescriptionInvalid(String description) {
+        if (description.length() < 3) {
+            System.out.println("Sua descrição tem que ser maior que 3 caracteres.");
+            return false;
+        }
+        return true;
+    }
 
 }

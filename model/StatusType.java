@@ -1,6 +1,6 @@
 package model;
 
 public enum StatusType {
-    PEDENTE,
+    PENDENTE,
     CONCLUIDA
 }
